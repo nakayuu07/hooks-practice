@@ -1,29 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = props => {
   const [state, setState] = useState(props)  
   const {name, price} = state
 
-  useEffect(() => {
-    console.log('this is like componentDidMount or componentDidUpdate')
-  }, )
-
-  useEffect(() => {
-    console.log('this is like componentDidMount')
-  }, [])
-
-  useEffect(() => {
-    console.log('this callback is for name only')
-  }, [name])
-
   return (
-    <>
-      <p>現在の{name}は、{price}です。</p>
+    <div className="container-fluid">
+      <p>現在の{name}は、{price}です</p>
       <button onClick={() => setState({...state, price: price - 100 })}>- 100</button>
       <button onClick={() => setState({...state, price: price + 100})}>+ 100</button>
       <button onClick={() => setState(props)}>reset</button>
       <input value={name} onChange={(e) => setState({...state, name: e.target.value})}/>
-    </>
+    </div>
   )
 }
 
