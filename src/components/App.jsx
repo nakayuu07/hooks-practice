@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
+import reducer from '../reducers/'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const App = props => {
-  const [state, setState] = useState(props)  
-  const {name, price} = state
+const App = () => {
+  const[state, dispatch] = useReducer(reducer, [])
+  const[title, setTitle] = useState('')
+  const[body, setBody] = useState('')
 
-  return (
-    <div className="container-fluid">
-      <p>現在の{name}は、{price}です</p>
-      <button onClick={() => setState({...state, price: price - 100 })}>- 100</button>
-      <button onClick={() => setState({...state, price: price + 100})}>+ 100</button>
-      <button onClick={() => setState(props)}>reset</button>
-      <input value={name} onChange={(e) => setState({...state, name: e.target.value})}/>
-    </div>
+  const addEvent = e => {
+    e.preventDefault()
+    dispatch({
+      type: 'CREATE_EVENT',
+      title,
+      body
+    })
+    setTitle('')
+    setBody('')
+  }
+    return (
+    <>
+      <h4>イベント作成フォーム</h4>
+      <form>
+        <div className="form-group">
+          <label htmlFor="formEventTitle">タイトル</label>
+          <input className="form-control" id="formEventTitle" value={title} onChange={e => setTitle(e.target.value)}/>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="formEventBody">ボディー</label>
+          <textarea className="form-control" id="formEventBody" value={body} onChange={e => setBody(e.target.value)}/>
+        </div>
+
+        <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
+        <button className="btn btn-danger" >全てのイベントを削除する</button>
+        <button className="btn btn-danger" >全ての操作ログを削除する</button>
+      </form>
+    </>
   )
 }
 
-App.defaultProps = {
-  name: '',
-  price: 1000
-}
 
 export default App
