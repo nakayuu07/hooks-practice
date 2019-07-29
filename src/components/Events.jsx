@@ -1,6 +1,7 @@
 import React from 'react'
+import Event from './Event'
 
-const Events = ({ events, deleteEvent }) => {
+const Events = ({ events, dispatch }) => {
   return (
     <>
       <h4>イベント一覧</h4>
@@ -15,12 +16,10 @@ const Events = ({ events, deleteEvent }) => {
         </thead>
         <tbody>
           {events.map(event => (
-            <tr key={`event-${event.id}`}>
-              <td>{event.id}</td>
-              <td>{event.title}</td>
-              <td>{event.body}</td>
-              <td><button type='button' className='btn btn-danger' onClick={() => deleteEvent(event.id)}>削除</button></td>
-            </tr>
+            <Event
+              event={event}
+              dispatch={dispatch}
+            />
           ))}
         </tbody>
       </table>
