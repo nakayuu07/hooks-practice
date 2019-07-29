@@ -1,7 +1,7 @@
 import React from 'react'
 import Event from './Event'
 
-const Events = ({ events, deleteEvent }) => {
+const Events = ({ events, dispatch }) => {
   return (
     <>
       <h4>イベント一覧</h4>
@@ -18,7 +18,7 @@ const Events = ({ events, deleteEvent }) => {
           {events.map(event => (
             <Event
               event={event}
-              deleteEvent={deleteEvent}
+              dispatch={dispatch}
             />
           ))}
         </tbody>

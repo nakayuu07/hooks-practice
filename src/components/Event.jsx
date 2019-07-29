@@ -1,6 +1,15 @@
 import React from 'react'
 
-const Event = ({ event, deleteEvent }) => {
+const Event = ({ event, dispatch }) => {
+  const deleteEvent = id => {
+    if (window.confirm(`イベント(id=${id})を削除していいですか？`)) {
+      dispatch({
+        type: 'DELETE_EVENT',
+        id
+      })
+    }
+  }
+
   return (
     <tr key={`event-${event.id}`}>
       <td>{event.id}</td>
