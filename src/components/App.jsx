@@ -21,18 +21,25 @@ const App = () => {
   }
 
   const deleteEvent = id => {
-    dispatch({
-      type: 'DELETE_EVENT',
-      id
-    })
+    if (window.confirm(`イベント(id=${id})を削除していいですか？`)) {
+      dispatch({
+        type: 'DELETE_EVENT',
+        id
+      })
+    }
   }
 
   const deleteAllEvents = e => {
     e.preventDefault()
-    dispatch({
-      type: 'DELETE_ALL_EVENT',
-    })
+    if (window.confirm('イベントを全て削除していいですか？')) {
+      dispatch({
+        type: 'DELETE_ALL_EVENT',
+      })
+    }
   }
+
+  const isCreate = title === '' || body === ''
+  const isDeleteAllEvents = state.length === 0
 
   return (
     <>
@@ -48,8 +55,8 @@ const App = () => {
           <textarea className="form-control" id="formEventBody" value={body} onChange={e => setBody(e.target.value)} />
         </div>
 
-        <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
-        <button className="btn btn-danger" onClick={deleteAllEvents}>全てのイベントを削除する</button>
+        <button className="btn btn-primary" onClick={addEvent} disabled={isCreate}>イベントを作成する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={isDeleteAllEvents}>全てのイベントを削除する</button>
         <button className="btn btn-danger" >全ての操作ログを削除する</button>
       </form>
       <Events events={state} deleteEvent={deleteEvent} />
