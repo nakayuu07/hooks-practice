@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Event from './Event'
 import AppContext from '../contexts/AppContext'
 
-const Events = ({ events, dispatch }) => {
+const Events = () => {
+  const { events } = useContext(AppContext)
+  console.log(useContext(AppContext))
   return (
     <>
       <h4>イベント一覧</h4>
@@ -20,7 +22,6 @@ const Events = ({ events, dispatch }) => {
             <Event
               key={`event-${event.id}-${event.title}`}
               event={event}
-              dispatch={dispatch}
             />
           ))}
         </tbody>
