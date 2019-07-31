@@ -1,5 +1,6 @@
 import React from 'react'
 import Event from './Event'
+import AppContext from '../contexts/AppContext'
 
 const Events = ({ events, dispatch }) => {
   return (
@@ -17,6 +18,7 @@ const Events = ({ events, dispatch }) => {
         <tbody>
           {events.map(event => (
             <Event
+              key={`event-${event.id}-${event.title}`}
               event={event}
               dispatch={dispatch}
             />
