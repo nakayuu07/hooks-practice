@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from '../contexts/AppContext'
 
-const EventForm = ({ events, dispatch }) => {
+
+const EventForm = () => {
+  const { events, dispatch } = useContext(AppContext)
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
 

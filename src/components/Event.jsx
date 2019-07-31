@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AppContext from '../contexts/AppContext'
 
-const Event = ({ event, dispatch }) => {
+const Event = ({ event }) => {
+  const { dispatch } = useContext(AppContext)
   const deleteEvent = id => {
     if (window.confirm(`イベント(id=${id})を削除していいですか？`)) {
       dispatch({
@@ -11,7 +13,7 @@ const Event = ({ event, dispatch }) => {
   }
 
   return (
-    <tr key={`event-${event.id}`}>
+    <tr>
       <td>{event.id}</td>
       <td>{event.title}</td>
       <td>{event.body}</td>
