@@ -6,8 +6,8 @@ const EventForm = () => {
   const { state, dispatch } = useContext(AppContext)
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
+  
   console.log(state)
-
   const addEvent = e => {
     e.preventDefault()
     dispatch({
@@ -28,7 +28,7 @@ const EventForm = () => {
     e.preventDefault()
     if (window.confirm('イベントを全て削除していいですか？')) {
       dispatch({ type: 'DELETE_ALL_EVENT' })
-      
+
       dispatch({
         type: 'ADD_OPERATION_LOG',
         description: '全てのイベントを削除しました。',
@@ -37,8 +37,16 @@ const EventForm = () => {
     }
   }
 
+  const deleteAllOperationLogs = e => {
+    e.preventDefault()
+    if (window.confirm('操作ログを全て削除していいですか？')){
+      dispatch({ type: 'DELETE_OPERATION_LOGS'})
+    }
+  }
+
   const isCreate = title === '' || body === ''
   const isDeleteAllEvents = state.events.length === 0
+  const isDeleteAllOperationLogs = state.operationLogs.length === 0
 
   return (
     <>
@@ -56,7 +64,7 @@ const EventForm = () => {
 
         <button className="btn btn-primary" onClick={addEvent} disabled={isCreate}>イベントを作成する</button>
         <button className="btn btn-danger" onClick={deleteAllEvents} disabled={isDeleteAllEvents}>全てのイベントを削除する</button>
-        <button className="btn btn-danger" >全ての操作ログを削除する</button>
+        <button className="btn btn-danger" onClick={deleteAllOperationLogs} disabled={isDeleteAllOperationLogs} >全ての操作ログを削除する</button>
       </form>
     </>
   )
