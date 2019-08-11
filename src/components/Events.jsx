@@ -3,8 +3,7 @@ import Event from './Event'
 import AppContext from '../contexts/AppContext'
 
 const Events = () => {
-  const { events } = useContext(AppContext)
-  console.log(useContext(AppContext))
+  const { state } = useContext(AppContext)
   return (
     <>
       <h4>イベント一覧</h4>
@@ -18,7 +17,7 @@ const Events = () => {
           </tr>
         </thead>
         <tbody>
-          {events.map(event => (
+          {state.events.map(event => (
             <Event
               key={`event-${event.id}-${event.title}`}
               event={event}
