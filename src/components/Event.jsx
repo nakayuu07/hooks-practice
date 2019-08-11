@@ -1,13 +1,18 @@
 import React, { useContext } from 'react'
 import AppContext from '../contexts/AppContext'
+import { timeCurrentIso8601 } from '../utils'
+
 
 const Event = ({ event }) => {
   const { dispatch } = useContext(AppContext)
+
   const deleteEvent = id => {
     if (window.confirm(`イベント(id=${id})を削除していいですか？`)) {
+      dispatch({ id, type: 'DELETE_EVENT' })
       dispatch({
-        type: 'DELETE_EVENT',
-        id
+        type: 'ADD_OPERATION_LOG',
+        description: `id${id}のイベントを削除しました。`,
+        operatedAt: timeCurrentIso8601()
       })
     }
   }
