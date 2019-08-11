@@ -3,7 +3,7 @@ import AppContext from '../contexts/AppContext'
 
 
 const EventForm = () => {
-  const { events, dispatch } = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
 
@@ -28,7 +28,7 @@ const EventForm = () => {
   }
 
   const isCreate = title === '' || body === ''
-  const isDeleteAllEvents = events.length === 0
+  const isDeleteAllEvents = state.events.length === 0
 
   return (
     <>
